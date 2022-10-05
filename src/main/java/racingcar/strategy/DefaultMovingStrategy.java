@@ -1,6 +1,6 @@
 package racingcar.strategy;
 
-public class RandomMovingStrategy implements MovingStrategy {
+public class DefaultMovingStrategy implements MovingStrategy {
 
         private static final int MOVING_CONDITION = 4;
 
