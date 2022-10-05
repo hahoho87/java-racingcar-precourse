@@ -3,7 +3,13 @@ package racingcar.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import racingcar.utils.StringUtils;
+
 public class RacingCars {
+	private static final String RACING_CAR_NAME_DELIMITER = ",";
+	private static final String DUPLICATE_NAME_ERROR_MESSAGE = "중복된 이름이 존재합니다.";
+	private static final String DELIMITER_NOT_FOUND_ERROR_MESSAGE = "자동차 이름은 쉼표(,)를 기준으로 구분해주세요.";
+	private static final String NAMES_EMPTY_ERROR_MESSAGE = "입력값이 없습니다.";
 	private final List<RacingCar> racingCars;
 
 	private RacingCars(List<RacingCar> racingCars) {
@@ -11,18 +17,30 @@ public class RacingCars {
 	}
 
 	public static RacingCars of(String names) {
-		List<RacingCar> racingCars = new ArrayList<>();
 		validateCarNames(names);
-		String[] split = names.split(",");
+		String[] nameArray = names.split(RACING_CAR_NAME_DELIMITER);
+		List<RacingCar> racingCars = generateRacingCars(nameArray);
+		return new RacingCars(racingCars);
+	}
 
-		for (String name : split) {
+	private static List<RacingCar> generateRacingCars(String[] nameArray) {
+		List<RacingCar> racingCars = new ArrayList<>();
+		addRacingCars(nameArray, racingCars);
+		return racingCars;
+	}
+
+	private static void addRacingCars(String[] nameArray, List<RacingCar> racingCars) {
+		for (String name : nameArray) {
 			RacingCar racingCar = new RacingCar(name);
-			if (racingCars.contains(racingCar)) {
-				throw new IllegalArgumentException("중복된 이름이 존재합니다.");
-			}
+			validateDuplicate(racingCars, racingCar);
 			racingCars.add(racingCar);
 		}
-		return new RacingCars(racingCars);
+	}
+
+	private static void validateDuplicate(List<RacingCar> racingCars, RacingCar racingCar) {
+		if (racingCars.contains(racingCar)) {
+			throw new IllegalArgumentException(DUPLICATE_NAME_ERROR_MESSAGE);
+		}
 	}
 
 	private static void validateCarNames(String carNames) {
@@ -32,14 +50,14 @@ public class RacingCars {
 
 
 	private static void validateContainDelimiter(String carNames) {
-		if (!carNames.contains(",")) {
-			throw new IllegalArgumentException("자동차 이름은 쉼표(,)를 기준으로 구분해주세요.");
+		if (!carNames.contains(RACING_CAR_NAME_DELIMITER)) {
+			throw new IllegalArgumentException(DELIMITER_NOT_FOUND_ERROR_MESSAGE);
 		}
 	}
 
 	private static void validateBlank(String carNames) {
-		if (carNames == null || carNames.isEmpty()) {
-			throw new IllegalArgumentException("입력값이 없습니다.");
+		if (StringUtils.isBlank(carNames)) {
+			throw new IllegalArgumentException(NAMES_EMPTY_ERROR_MESSAGE);
 		}
 	}
 
