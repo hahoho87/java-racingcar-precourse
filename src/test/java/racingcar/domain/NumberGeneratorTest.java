@@ -1,19 +1,19 @@
 package racingcar.domain;
 
-import org.assertj.core.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class NumberGeneratorTest {
 
-	@Test
-	@DisplayName("0~9 사이의 랜덤 숫자를 생성한다.")
-	void generateNumber() {
-		NumberGenerator numberGenerator = new NumberGenerator();
-		for (int i = 0; i < 100; i++) {
-			int number = numberGenerator.generateNumber();
-			Assertions.assertThat(number).isBetween(0, 9);
-		}
+	@ParameterizedTest
+	@ValueSource(ints = {0, 1, 2, 3, 4})
+	@DisplayName("숫자 생성 테스트")
+	void numberGeneratorTest(int input) {
+		NumberGenerator numberGenerator = () -> input;
+		assertEquals(input, numberGenerator.generateNumber());
 	}
 
 }
