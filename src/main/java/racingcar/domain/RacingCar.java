@@ -2,6 +2,7 @@ package racingcar.domain;
 
 import java.util.Objects;
 
+import racingcar.strategy.MovingStrategy;
 import racingcar.utils.StringUtils;
 
 public class RacingCar {
@@ -12,7 +13,7 @@ public class RacingCar {
 	private static final String NAME_BLANK_ERROR_MESSAGE = "자동차 이름은 공백일 수 없습니다.";
 
 	private final String name;
-	private final int currentPosition;
+	private int currentPosition;
 
 	public RacingCar(String name) {
 		validateCarName(name);
@@ -64,5 +65,15 @@ public class RacingCar {
 	@Override
 	public int hashCode() {
 		return name != null ? name.hashCode() : 0;
+	}
+
+	public void move(MovingStrategy movingStrategy) {
+		if (movingStrategy.isMovable()) {
+			move();
+		}
+	}
+
+	protected void move() {
+		currentPosition++;
 	}
 }

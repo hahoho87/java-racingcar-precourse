@@ -3,6 +3,7 @@ package racingcar.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import racingcar.strategy.MovingStrategy;
 import racingcar.utils.StringUtils;
 
 public class RacingCars {
@@ -63,5 +64,11 @@ public class RacingCars {
 
 	public List<RacingCar> getRacingCars() {
 		return racingCars;
+	}
+
+	public void move(MovingStrategy movingStrategy) {
+		for (RacingCar racingCar : racingCars) {
+			racingCar.move(movingStrategy);
+		}
 	}
 }
