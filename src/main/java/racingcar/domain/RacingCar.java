@@ -1,9 +1,9 @@
 package racingcar.domain;
 
-import java.util.Objects;
-
 import racingcar.strategy.MovingStrategy;
 import racingcar.utils.StringUtils;
+
+import java.util.Objects;
 
 public class RacingCar {
 
@@ -13,12 +13,12 @@ public class RacingCar {
 	private static final String NAME_BLANK_ERROR_MESSAGE = "자동차 이름은 공백일 수 없습니다.";
 
 	private final String name;
-	private int currentPosition;
+	private final CurrentPosition currentPosition;
 
 	public RacingCar(String name) {
 		validateCarName(name);
 		this.name = name;
-		this.currentPosition = STARTING_POSITION;
+		this.currentPosition = new CurrentPosition(STARTING_POSITION);
 	}
 
 	private void validateCarName(String name) {
@@ -42,7 +42,11 @@ public class RacingCar {
 		}
 	}
 
-	public int getPosition() {
+	public int getPositionValue() {
+		return currentPosition.getValue();
+	}
+
+	public CurrentPosition getCurrentPosition() {
 		return currentPosition;
 	}
 
@@ -74,6 +78,6 @@ public class RacingCar {
 	}
 
 	protected void move() {
-		currentPosition++;
+		currentPosition.increasePosition();
 	}
 }
