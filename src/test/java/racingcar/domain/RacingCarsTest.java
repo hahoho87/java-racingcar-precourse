@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import java.util.List;
+
 class RacingCarsTest {
 
 	@Test
@@ -61,4 +63,19 @@ class RacingCarsTest {
 			assertThat(racingCar.getPosition()).isZero());
 	}
 
+	@Test
+	@DisplayName("레이싱카들의 현재 이름과 위치를 갖는 Records 객체를 생성한다.")
+	void createRecordsTest() {
+		RacingCars racingCars = RacingCars.of("haha,hihi");
+		Records records = racingCars.getRecords();
+		List<Record> recordList = records.getRecordList();
+		assertThat(recordList).hasSize(2);
+		assertThat(recordList.get(0).getName()).isEqualTo("haha");
+		assertThat(recordList.get(0).getPosition()).isZero();
+
+		racingCars.move(() -> true);
+		Records records1 = racingCars.getRecords();
+		List<Record> recordList1 = records1.getRecordList();
+		assertThat(recordList1.get(0).getPosition()).isEqualTo(1);
+	}
 }

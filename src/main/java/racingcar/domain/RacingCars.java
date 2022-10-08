@@ -71,4 +71,13 @@ public class RacingCars {
 			racingCar.move(movingStrategy);
 		}
 	}
+
+	public Records getRecords() {
+		List<Record> recordList = new ArrayList<>();
+		for (RacingCar racingCar : racingCars) {
+			Record record = Record.from(racingCar);
+			recordList.add(record);
+		}
+		return Records.of(recordList);
+	}
 }
