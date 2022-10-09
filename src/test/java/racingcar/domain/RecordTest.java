@@ -14,7 +14,7 @@ class RecordTest {
 		RacingCar racingCar = new RacingCar(name);
 		Record record = Record.from(racingCar);
 		assertThat(record.getName()).isEqualTo(racingCar.getName());
-		assertThat(record.getPosition()).isEqualTo(racingCar.getPosition());
+		assertThat(record.getPosition().getValue()).isEqualTo(racingCar.getPositionValue());
 	}
 
 

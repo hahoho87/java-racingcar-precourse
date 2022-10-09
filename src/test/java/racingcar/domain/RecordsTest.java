@@ -22,6 +22,18 @@ class RecordsTest {
         assertThat(records.getRecordList()).containsExactly(haha, hoho);
     }
 
+    @Test
+    @DisplayName("현재 위치가 가장 큰 이름을 반환한다.")
+    void getWinnerTest() {
+        Record haha = Record.from(new RacingCar("haha"));
+        Record hoho = Record.from(new RacingCar("hoho"));
+        List<Record> recordList = Arrays.asList(haha, hoho);
+        Records records = Records.of(recordList);
+        List<String> winners = records.getWinner();
+        assertThat(winners).hasSize(2).containsExactly("haha", "hoho");
+
+    }
+
 }
 
 

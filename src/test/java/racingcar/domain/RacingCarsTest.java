@@ -51,7 +51,7 @@ class RacingCarsTest {
 		RacingCars racingCars = RacingCars.of("haha,hihi,hoho");
 		racingCars.move(() -> true);
 		racingCars.getRacingCars().forEach(racingCar ->
-			assertThat(racingCar.getPosition()).isEqualTo(1));
+			assertThat(racingCar.getPositionValue()).isEqualTo(1));
 	}
 
 	@Test
@@ -60,7 +60,7 @@ class RacingCarsTest {
 		RacingCars racingCars = RacingCars.of("haha,hihi,hoho");
 		racingCars.move(() -> false);
 		racingCars.getRacingCars().forEach(racingCar ->
-			assertThat(racingCar.getPosition()).isZero());
+			assertThat(racingCar.getPositionValue()).isZero());
 	}
 
 	@Test
@@ -71,11 +71,11 @@ class RacingCarsTest {
 		List<Record> recordList = records.getRecordList();
 		assertThat(recordList).hasSize(2);
 		assertThat(recordList.get(0).getName()).isEqualTo("haha");
-		assertThat(recordList.get(0).getPosition()).isZero();
+		assertThat(recordList.get(0).getPosition().getValue()).isZero();
 
 		racingCars.move(() -> true);
 		Records records1 = racingCars.getRecords();
 		List<Record> recordList1 = records1.getRecordList();
-		assertThat(recordList1.get(0).getPosition()).isEqualTo(1);
+		assertThat(recordList1.get(0).getPosition().getValue()).isEqualTo(1);
 	}
 }

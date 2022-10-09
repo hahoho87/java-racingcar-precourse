@@ -20,6 +20,10 @@ public class CurrentPosition {
         value++;
     }
 
+    public int compareTo(int input) {
+        return value - input;
+
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

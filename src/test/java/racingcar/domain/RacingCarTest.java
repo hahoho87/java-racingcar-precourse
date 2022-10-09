@@ -38,7 +38,7 @@ class RacingCarTest {
 	@DisplayName("초기 생성된 자동차의 위치는 0 이다.")
 	void racingCarPositionTest(String name) {
 		RacingCar car = new RacingCar(name);
-		assertThat(car.getPosition()).isZero();
+		assertThat(car.getPositionValue()).isZero();
 	}
 
 	@ParameterizedTest
@@ -54,7 +54,7 @@ class RacingCarTest {
 	void racingCarMoveTest() {
 		RacingCar car = new RacingCar("haha");
 		car.move(() -> true);
-		assertThat(car.getPosition()).isEqualTo(1);
+		assertThat(car.getPositionValue()).isEqualTo(1);
 	}
 
 	@Test
@@ -62,6 +62,6 @@ class RacingCarTest {
 	void racingCarNotMoveTest() {
 		RacingCar car = new RacingCar("haha");
 		car.move(() -> false);
-		assertThat(car.getPosition()).isZero();
+		assertThat(car.getPositionValue()).isZero();
 	}
 }
