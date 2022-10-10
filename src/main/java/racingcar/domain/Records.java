@@ -17,13 +17,14 @@ public class Records {
         return recordList;
     }
 
-    public List<String> getWinner() {
+    public Winners getWinners() {
         Comparator<CurrentPosition> comparator = (s1, s2) -> s2.compareTo(s1.getValue());
         Map<CurrentPosition, List<String>> resultMap = new TreeMap<>(comparator);
         for (Record record : recordList) {
             putResultMap(resultMap, record);
         }
-        return resultMap.entrySet().iterator().next().getValue();
+        List<String> winnerNames = resultMap.entrySet().iterator().next().getValue();
+        return Winners.from(winnerNames);
     }
 
     private void putResultMap(Map<CurrentPosition, List<String>> result, Record record) {

@@ -23,12 +23,11 @@ public class Result {
         recordsList.add(records);
     }
 
-    public void getWinner(int lastRaceNumber) {
-        if (recordsList.size() < lastRaceNumber) {
-            throw new IllegalArgumentException("결과가 제대로 기록되지 않았습니다.");
-        }
-        Records records = recordsList.get(lastRaceNumber - 1);
-        records.getWinner();
+    public Winners getWinner() {
+        int lastRoundNumber = recordsList.size() - 1;
+        Records records = recordsList.get(lastRoundNumber);
+        Winners winners = records.getWinners();
+        return winners;
     }
 
 }

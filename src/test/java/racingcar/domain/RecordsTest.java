@@ -1,6 +1,5 @@
 package racingcar.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class RecordsTest {
 
@@ -29,8 +27,9 @@ class RecordsTest {
         Record hoho = Record.from(new RacingCar("hoho"));
         List<Record> recordList = Arrays.asList(haha, hoho);
         Records records = Records.of(recordList);
-        List<String> winners = records.getWinner();
-        assertThat(winners).hasSize(2).containsExactly("haha", "hoho");
+        Winners winners = records.getWinners();
+        List<String> names = winners.getNames();
+        assertThat(names).hasSize(2).containsExactly("haha", "hoho");
 
     }
 
