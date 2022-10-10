@@ -3,11 +3,12 @@ package racingcar.domain;
 import java.util.Objects;
 
 public class CurrentPosition {
+    private static final String INVALID_CURRENT_POSITION_ERROR_MESSAGE = "위치는 0보다 작을 수 없습니다.";
     private int value;
 
     public CurrentPosition(int value) {
         if (value < 0) {
-            throw new IllegalArgumentException("위치는 0보다 작을 수 없습니다.");
+            throw new IllegalArgumentException(INVALID_CURRENT_POSITION_ERROR_MESSAGE);
         }
         this.value = value;
     }
