@@ -19,10 +19,9 @@ public class RacingCarController {
     }
 
     public void run() {
-        String carNames = inputView.inputCarNames();
-        RacingCars racingCars = RacingCars.of(carNames);
+        RacingCars racingCars = getRacingCars();
 
-        int maxRaceNumber = inputView.inputMaxRaceNumber();
+        int maxRaceNumber = getInputMaxRaceNumber();
         RacingGame racingGame = RacingGame.of(racingCars, new RandomStrategy(), maxRaceNumber);
         racingGame.play();
 
@@ -31,5 +30,28 @@ public class RacingCarController {
 
         Winners winners = result.getWinner();
         outputView.printWinners(winners);
+    }
+
+    private int getInputMaxRaceNumber() {
+        int maxRaceNumber;
+        try {
+            maxRaceNumber = inputView.inputMaxRaceNumber();
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return getInputMaxRaceNumber();
+        }
+        return maxRaceNumber;
+    }
+
+    private RacingCars getRacingCars() {
+        RacingCars racingCars;
+        try {
+            String carNames = inputView.inputCarNames();
+            racingCars = RacingCars.of(carNames);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return getRacingCars();
+        }
+        return racingCars;
     }
 }
