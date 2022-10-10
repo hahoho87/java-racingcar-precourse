@@ -33,7 +33,7 @@ public class RacingCar {
 	}
 
 	private boolean isExceededMinimumLength(String name) {
-		return name.length() > MINIMUM_CAR_NAME_LENGTH;
+		return name.length() >= MINIMUM_CAR_NAME_LENGTH;
 	}
 
 	private void validateEmptyName(String name) {
